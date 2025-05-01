@@ -1,0 +1,50 @@
+{
+    "name": "marshmallow/nova-mega-filter",
+    "description": "Allows you to control the columns and filters shown on your nova resources.",
+    "keywords": [
+        "laravel",
+        "nova",
+        "filter",
+        "columns",
+        "big-filter",
+        "mega-filter",
+        "marshmallow"
+    ],
+    "authors": [
+        {
+            "name": "LTKort"
+        },
+        {
+            "name": "Rafael Milewski"
+        }
+    ],
+    "repositories": {
+        "1": {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    },
+    "license": "MIT",
+    "require": {
+        "php": "^8.0",
+        "laravel/nova": "^4.0",
+        "nova-kit/nova-packages-tool": "^1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Marshmallow\\MegaFilter\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Marshmallow\\MegaFilter\\MegaFilterServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

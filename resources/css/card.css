@@ -1,0 +1,15 @@
+@tailwind components;
+@tailwind utilities;
+
+.nova-mega-filter {
+    @apply relative z-10 overflow-visible;
+}
+
+/* Ensure Select dropdowns appear above other content */
+.nova-mega-filter .select-input {
+    @apply relative;
+}
+
+.nova-mega-filter .select-input .dropdown-menu {
+    @apply z-[100] absolute;
+}
