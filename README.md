@@ -99,6 +99,37 @@ public function filters(NovaRequest $request): array
 }
 ```
 
+## Filter Width Control
+
+You can control the width of individual filters using Tailwind CSS width classes. This allows you to create custom layouts where some filters take up more or less space:
+
+```php
+public function filters(NovaRequest $request): array
+{
+    return [
+        MegaFilter::make([
+            (new Filter001)->withMeta(['width' => 'w-1/3']),
+            (new Filter002)->withMeta(['width' => 'w-2/3']),
+            (new Filter003),  // Uses default width
+            (new Filter004)->withMeta(['width' => 'w-1/2']),
+            (new Filter005)->withMeta(['width' => 'w-1/2']),
+        ]),
+    ];
+}
+```
+
+Available width classes include:
+
+-   `w-full` - Full width (default)
+-   `w-1/2` - Half width (50%)
+-   `w-1/3` - One third width (33.33%)
+-   `w-2/3` - Two thirds width (66.67%)
+-   `w-1/4` - Quarter width (25%)
+-   `w-3/4` - Three quarters width (75%)
+-   `w-1/6`, `w-2/6`, `w-3/6`, `w-4/6`, `w-5/6` - Sixth-based widths
+-   `w-1/12`, `w-2/12`, `w-3/12`, etc. - Twelfth-based widths
+-   Any other Tailwind width class
+
 > Note: At the moment this package only works with a single Mega Filter per resource, adding multiple on the same resource may result in unexpected behavior.
 
 ## License
