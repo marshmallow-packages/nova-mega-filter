@@ -61,7 +61,7 @@
                             v-for="filter in syncedFilters"
                             :key="filter.name"
                             class="relative filter__loop"
-                            :class="filter.width || 'w-full'"
+                            :class="filter.width"
                         >
                             <!-- Loading overlay for each individual filter -->
                             <div
