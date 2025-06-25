@@ -108,11 +108,11 @@ public function filters(NovaRequest $request): array
 {
     return [
         MegaFilter::make([
-            (new TestFilter)->withMeta(['width' => 'w-1/3']),
-            (new TestFilter)->withMeta(['width' => 'w-2/3']),
-            (new TestFilter),  // Uses default width
-            (new TestFilter)->withMeta(['width' => 'w-1/2']),
-            (new TestFilter)->withMeta(['width' => 'w-1/2']),
+            (new Filter001)->withMeta(['width' => 'w-1/3']),
+            (new Filter002)->withMeta(['width' => 'w-2/3']),
+            (new Filter003),  // Uses default width
+            (new Filter004)->withMeta(['width' => 'w-1/2']),
+            (new Filter005)->withMeta(['width' => 'w-1/2']),
         ]),
     ];
 }
