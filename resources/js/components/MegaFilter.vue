@@ -267,276 +267,242 @@ export default {
     }
 }
 
-.w-0 {
-    width: 0px !important;
-}
+/* Scoped width utilities using Tailwind's @apply directive */
+@screen md {
+    .nova-mega-filter .w-0 {
+        @apply !w-0;
+    }
 
-.w-px {
-    width: 1px !important;
-}
+    .nova-mega-filter .w-px {
+        @apply !w-px;
+    }
 
-.w-0.5 {
-    width: 0.125rem !important;
-    /* 2px */
-}
+    .nova-mega-filter .w-0\.5 {
+        @apply !w-0.5;
+    }
 
-.w-1 {
-    width: 0.25rem !important;
-    /* 4px */
-}
+    .nova-mega-filter .w-1 {
+        @apply !w-1;
+    }
 
-.w-1.5 {
-    width: 0.375rem !important;
-    /* 6px */
-}
+    .nova-mega-filter .w-1\.5 {
+        @apply !w-1.5;
+    }
 
-.w-2 {
-    width: 0.5rem !important;
-    /* 8px */
-}
+    .nova-mega-filter .w-2 {
+        @apply !w-2;
+    }
 
-.w-2.5 {
-    width: 0.625rem !important;
-    /* 10px */
-}
+    .nova-mega-filter .w-2\.5 {
+        @apply !w-2.5;
+    }
 
-.w-3 {
-    width: 0.75rem !important;
-    /* 12px */
-}
+    .nova-mega-filter .w-3 {
+        @apply !w-3;
+    }
 
-.w-3.5 {
-    width: 0.875rem !important;
-    /* 14px */
-}
+    .nova-mega-filter .w-3\.5 {
+        @apply !w-3.5;
+    }
 
-.w-4 {
-    width: 1rem !important;
-    /* 16px */
-}
+    .nova-mega-filter .w-4 {
+        @apply !w-4;
+    }
 
-.w-5 {
-    width: 1.25rem !important;
-    /* 20px */
-}
+    .nova-mega-filter .w-5 {
+        @apply !w-5;
+    }
 
-.w-6 {
-    width: 1.5rem !important;
-    /* 24px */
-}
+    .nova-mega-filter .w-6 {
+        @apply !w-6;
+    }
 
-.w-7 {
-    width: 1.75rem !important;
-    /* 28px */
-}
+    .nova-mega-filter .w-7 {
+        @apply !w-7;
+    }
 
-.w-8 {
-    width: 2rem !important;
-    /* 32px */
-}
+    .nova-mega-filter .w-8 {
+        @apply !w-8;
+    }
 
-.w-9 {
-    width: 2.25rem !important;
-    /* 36px */
-}
+    .nova-mega-filter .w-9 {
+        @apply !w-9;
+    }
 
-.w-10 {
-    width: 2.5rem !important;
-    /* 40px */
-}
+    .nova-mega-filter .w-10 {
+        @apply !w-10;
+    }
 
-.w-11 {
-    width: 2.75rem !important;
-    /* 44px */
-}
+    .nova-mega-filter .w-11 {
+        @apply !w-11;
+    }
 
-.w-12 {
-    width: 3rem !important;
-    /* 48px */
-}
+    .nova-mega-filter .w-12 {
+        @apply !w-12;
+    }
 
-.w-14 {
-    width: 3.5rem !important;
-    /* 56px */
-}
+    .nova-mega-filter .w-14 {
+        @apply !w-14;
+    }
 
-.w-16 {
-    width: 4rem !important;
-    /* 64px */
-}
+    .nova-mega-filter .w-16 {
+        @apply !w-16;
+    }
 
-.w-20 {
-    width: 5rem !important;
-    /* 80px */
-}
+    .nova-mega-filter .w-20 {
+        @apply !w-20;
+    }
 
-.w-24 {
-    width: 6rem !important;
-    /* 96px */
-}
+    .nova-mega-filter .w-24 {
+        @apply !w-24;
+    }
 
-.w-28 {
-    width: 7rem !important;
-    /* 112px */
-}
+    .nova-mega-filter .w-28 {
+        @apply !w-28;
+    }
 
-.w-32 {
-    width: 8rem !important;
-    /* 128px */
-}
+    .nova-mega-filter .w-32 {
+        @apply !w-32;
+    }
 
-.w-36 {
-    width: 9rem !important;
-    /* 144px */
-}
+    .nova-mega-filter .w-36 {
+        @apply !w-36;
+    }
 
-.w-40 {
-    width: 10rem !important;
-    /* 160px */
-}
+    .nova-mega-filter .w-40 {
+        @apply !w-40;
+    }
 
-.w-44 {
-    width: 11rem !important;
-    /* 176px */
-}
+    .nova-mega-filter .w-44 {
+        @apply !w-44;
+    }
 
-.w-48 {
-    width: 12rem !important;
-    /* 192px */
-}
+    .nova-mega-filter .w-48 {
+        @apply !w-48;
+    }
 
-.w-52 {
-    width: 13rem !important;
-    /* 208px */
-}
+    .nova-mega-filter .w-52 {
+        @apply !w-52;
+    }
 
-.w-56 {
-    width: 14rem !important;
-    /* 224px */
-}
+    .nova-mega-filter .w-56 {
+        @apply !w-56;
+    }
 
-.w-60 {
-    width: 15rem !important;
-    /* 240px */
-}
+    .nova-mega-filter .w-60 {
+        @apply !w-60;
+    }
 
-.w-64 {
-    width: 16rem !important;
-    /* 256px */
-}
+    .nova-mega-filter .w-64 {
+        @apply !w-64;
+    }
 
-.w-72 {
-    width: 18rem !important;
-    /* 288px */
-}
+    .nova-mega-filter .w-72 {
+        @apply !w-72;
+    }
 
-.w-80 {
-    width: 20rem !important;
-    /* 320px */
-}
+    .nova-mega-filter .w-80 {
+        @apply !w-80;
+    }
 
-.w-96 {
-    width: 24rem !important;
-    /* 384px */
-}
+    .nova-mega-filter .w-96 {
+        @apply !w-96;
+    }
 
-.w-auto {
-    width: auto !important;
-}
+    .nova-mega-filter .w-auto {
+        @apply !w-auto;
+    }
 
-.w-1\/2 {
-    width: 50% !important;
-}
+    .nova-mega-filter .w-1\/2 {
+        @apply !w-1/2;
+    }
 
-.w-1\/3 {
-    width: 33.333333% !important;
-}
+    .nova-mega-filter .w-1\/3 {
+        @apply !w-1/3;
+    }
 
-.w-2\/3 {
-    width: 66.666667% !important;
-}
+    .nova-mega-filter .w-2\/3 {
+        @apply !w-2/3;
+    }
 
-.w-1\/4 {
-    width: 25% !important;
-}
+    .nova-mega-filter .w-1\/4 {
+        @apply !w-1/4;
+    }
 
-.w-2\/4 {
-    width: 50% !important;
-}
+    .nova-mega-filter .w-2\/4 {
+        @apply !w-2/4;
+    }
 
-.w-3\/4 {
-    width: 75% !important;
-}
+    .nova-mega-filter .w-3\/4 {
+        @apply !w-3/4;
+    }
 
-.w-1\/5 {
-    width: 20% !important;
-}
+    .nova-mega-filter .w-1\/5 {
+        @apply !w-1/5;
+    }
 
-.w-2\/5 {
-    width: 40% !important;
-}
+    .nova-mega-filter .w-2\/5 {
+        @apply !w-2/5;
+    }
 
-.w-3\/5 {
-    width: 60% !important;
-}
+    .nova-mega-filter .w-3\/5 {
+        @apply !w-3/5;
+    }
 
-.w-4\/5 {
-    width: 80% !important;
-}
+    .nova-mega-filter .w-4\/5 {
+        @apply !w-4/5;
+    }
 
-.w-1\/6 {
-    width: 16.666667% !important;
-}
+    .nova-mega-filter .w-1\/6 {
+        @apply !w-1/6;
+    }
 
-.w-2\/6 {
-    width: 33.333333% !important;
-}
+    .nova-mega-filter .w-2\/6 {
+        @apply !w-2/6;
+    }
 
-.w-3\/6 {
-    width: 50% !important;
-}
+    .nova-mega-filter .w-3\/6 {
+        @apply !w-3/6;
+    }
 
-.w-4\/6 {
-    width: 66.666667% !important;
-}
+    .nova-mega-filter .w-4\/6 {
+        @apply !w-4/6;
+    }
 
-.w-5\/6 {
-    width: 83.333333% !important;
-}
+    .nova-mega-filter .w-5\/6 {
+        @apply !w-5/6;
+    }
 
-.w-1\/12 {
-    width: 8.333333% !important;
-}
+    .nova-mega-filter .w-1\/12 {
+        @apply !w-1/12;
+    }
 
-.w-2\/12 {
-    width: 16.666667% !important;
-}
+    .nova-mega-filter .w-2\/12 {
+        @apply !w-2/12;
+    }
 
-.w-3\/12 {
-    width: 25% !important;
-}
+    .nova-mega-filter .w-3\/12 {
+        @apply !w-3/12;
+    }
 
-.w-4\/12 {
-    width: 33.333333% !important;
-}
+    .nova-mega-filter .w-4\/12 {
+        @apply !w-4/12;
+    }
 
-.w-5\/12 {
-    width: 41.666667% !important;
-}
+    .nova-mega-filter .w-5\/12 {
+        @apply !w-5/12;
+    }
 
-.w-6\/12 {
-    width: 50% !important;
-}
+    .nova-mega-filter .w-6\/12 {
+        @apply !w-6/12;
+    }
 
-.w-7\/12 {
-    width: 58.333333% !important;
-}
+    .nova-mega-filter .w-7\/12 {
+        @apply !w-7/12;
+    }
 
-.w-8\/12 {
-    width: 66.666667% !important;
-}
-
-.w-full {
-    width: 100% !important;
+    .nova-mega-filter .w-8\/12 {
+        @apply !w-8/12;
+    }
 }
 </style>
