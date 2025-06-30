@@ -1,103 +1,49 @@
 <template>
-    <Card
-        class="transition rounded nova-mega-filter"
-        :style="{ '--columns-desktop': columns || 2 }"
-        :class="{ '--expanded': collapsed }"
-    >
-        <div
-            :class="{ 'h-14': collapsed, 'h-14': !collapsed }"
-            class="flex items-center w-full py-2 transition-all filter__header"
-        >
-            <div
-                class="flex items-center justify-between w-full px-2 md:px-4 min-h-14"
-            >
-                <div
-                    class="flex items-center justify-start w-full ml-1 text-base cursor-pointer"
-                    @click.prevent="toggleCollapse"
-                >
-                    <p
-                        class="text-base font-bold tracking-wide text-left dark:text-white whitespace-nowrap"
-                    >
+    <Card class="transition rounded nova-mega-filter" :style="{ '--columns-desktop': columns || 2 }"
+        :class="{ '--expanded': collapsed }">
+        <div :class="{ 'h-14': collapsed, 'h-14': !collapsed }"
+            class="flex items-center w-full py-2 transition-all filter__header">
+            <div class="flex items-center justify-between w-full px-2 md:px-4 min-h-14">
+                <div class="flex items-center justify-start w-full ml-1 text-base cursor-pointer"
+                    @click.prevent="toggleCollapse">
+                    <p class="text-base font-bold tracking-wide text-left dark:text-white whitespace-nowrap">
                         {{ filtersTitle }}
                     </p>
-                    <Icon
-                        :type="collapsed ? 'chevron-up' : 'chevron-down'"
-                        class="ml-1 text-gray-400"
-                        width="16"
-                    />
+                    <Icon :type="collapsed ? 'chevron-up' : 'chevron-down'" class="ml-1 text-gray-400" width="16" />
                 </div>
                 <div class="flex items-center justify-end shrink-0 gap-x-4">
-                    <Button
-                        v-if="filtersAreApplied"
-                        variant="ghost"
-                        class=""
-                        :label="__('Reset filters')"
-                        @click.prevent="clearFilters"
-                    />
+                    <Button v-if="filtersAreApplied" variant="ghost" class="" :label="__('Reset filters')"
+                        @click.prevent="clearFilters" />
 
-                    <Button
-                        :variant="filtersAreApplied ? 'solid' : 'ghost'"
-                        icon="funnel"
-                        :trailing-icon="
-                            collapsed ? 'chevron-up' : 'chevron-down'
-                        "
-                        padding="tight"
-                        class="dark:text-gray-200"
-                        :label="activeFilterCount > 0 ? activeFilterCount : ''"
-                        :aria-label="__('Mega Filter')"
-                        @click.prevent="toggleCollapse"
-                    />
+                    <Button :variant="filtersAreApplied ? 'solid' : 'ghost'" icon="funnel" :trailing-icon="collapsed ? 'chevron-up' : 'chevron-down'
+                        " padding="tight" class="dark:text-gray-200"
+                        :label="activeFilterCount > 0 ? activeFilterCount : ''" :aria-label="__('Mega Filter')"
+                        @click.prevent="toggleCollapse" />
                 </div>
             </div>
         </div>
 
         <Collapse :when="collapsed">
-            <div
-                class="p-2 overflow-visible rounded-b md:p-4 filter__inner dark:bg-gray-900"
-            >
+            <div class="p-2 overflow-visible rounded-b md:p-4 filter__inner dark:bg-gray-900">
                 <div v-if="filters.length">
                     <div class="flex flex-wrap">
-                        <div
-                            v-for="filter in syncedFilters"
-                            :key="filter.name"
-                            class="relative filter__loop"
-                            :class="filter.width"
-                        >
+                        <div v-for="filter in syncedFilters" :key="filter.name" class="relative filter__loop"
+                            :class="filter.width">
                             <!-- Loading overlay for each individual filter -->
-                            <div
-                                v-if="loadingFilters[filter.class]"
-                                class="absolute inset-0 z-10 flex items-center justify-center bg-white bg-opacity-70 dark:bg-gray-800 dark:bg-opacity-80"
-                            >
-                                <svg
-                                    class="w-6 h-6 animate-spin text-primary-500"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <circle
-                                        class="opacity-25"
-                                        cx="12"
-                                        cy="12"
-                                        r="10"
-                                        stroke="currentColor"
-                                        stroke-width="4"
-                                    ></circle>
-                                    <path
-                                        class="opacity-75"
-                                        fill="currentColor"
-                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                    ></path>
+                            <div v-if="loadingFilters[filter.class]"
+                                class="absolute inset-0 z-10 flex items-center justify-center bg-white bg-opacity-70 dark:bg-gray-800 dark:bg-opacity-80">
+                                <svg class="w-6 h-6 animate-spin text-primary-500" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                        stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
                                 </svg>
                             </div>
-                            <component
-                                :is="filter.component"
-                                :filter-key="filter.class"
-                                :lens="lens"
-                                :resource-name="resourceName"
-                                :key="`filter-${filter.class}-${refreshKey}`"
-                                @change="onChange(filter.class)"
-                                @input="onChange(filter.class)"
-                            />
+                            <component :is="filter.component" :filter-key="filter.class" :lens="lens"
+                                :resource-name="resourceName" :key="`filter-${filter.class}-${refreshKey}`"
+                                @change="onChange(filter.class)" @input="onChange(filter.class)" />
                         </div>
                     </div>
                 </div>
@@ -107,398 +53,456 @@
 </template>
 
 <script>
-    import { Filterable, InteractsWithQueryString } from "laravel-nova-mixins";
-    import { Button } from "laravel-nova-ui";
-    import { Collapse } from "vue-collapsed";
-    import { filtersAreApplied, megaFilterOnly } from "./MegaFilter";
+import { Filterable, InteractsWithQueryString } from "laravel-nova-mixins";
+import { Button } from "laravel-nova-ui";
+import { Collapse } from "vue-collapsed";
+import { filtersAreApplied, megaFilterOnly } from "./MegaFilter";
 
-    export default {
-        name: "MegaFilter",
-        components: { Collapse, Button },
-        mixins: [Filterable, InteractsWithQueryString],
-        emits: ["filter-changed", "clear-selected-filters"],
-        props: {
-            filters: Array,
-            columns: { type: Number, default: 2 },
-            open: { type: Boolean, default: false },
-            resourceName: String,
-            viaResource: String,
-            viaResourceId: [Number, String],
-            viaRelationship: String,
-            activeFilterCount: Number,
+export default {
+    name: "MegaFilter",
+    components: { Collapse, Button },
+    mixins: [Filterable, InteractsWithQueryString],
+    emits: ["filter-changed", "clear-selected-filters"],
+    props: {
+        filters: Array,
+        columns: { type: Number, default: 2 },
+        open: { type: Boolean, default: false },
+        resourceName: String,
+        viaResource: String,
+        viaResourceId: [Number, String],
+        viaRelationship: String,
+        activeFilterCount: Number,
+    },
+    data() {
+        return {
+            collapsed: false,
+            loadingFilters: {},
+            refreshKey: 0,
+            syncedFilters: [],
+        };
+    },
+    methods: {
+        clearFilters() {
+            this.clearSelectedFilters();
+            this.collapsed = false;
         },
-        data() {
-            return {
-                collapsed: false,
-                loadingFilters: {},
-                refreshKey: 0,
-                syncedFilters: [],
+        onChange(filterKey) {
+            // Use direct property assignment instead of Vue.set
+            this.loadingFilters = {
+                ...this.loadingFilters,
+                [filterKey]: true,
             };
-        },
-        methods: {
-            clearFilters() {
-                this.clearSelectedFilters();
-                this.collapsed = false;
-            },
-            onChange(filterKey) {
-                // Use direct property assignment instead of Vue.set
+
+            this.filterChanged();
+
+            // Remove loading state after a short delay
+            setTimeout(() => {
                 this.loadingFilters = {
                     ...this.loadingFilters,
-                    [filterKey]: true,
+                    [filterKey]: false,
                 };
-
-                this.filterChanged();
-
-                // Remove loading state after a short delay
-                setTimeout(() => {
-                    this.loadingFilters = {
-                        ...this.loadingFilters,
-                        [filterKey]: false,
-                    };
-                }, 500);
-            },
-            toggleCollapse() {
-                this.collapsed = !this.collapsed;
-            },
-            refreshFilter() {
-                this.refreshKey += 1; // Force filter components to re-render
-                this.updateSyncedFilters();
-            },
-            updateSyncedFilters() {
-                // Get the latest filter data from the store
-                if (this.resourceName) {
-                    const storeFilters =
-                        this.$store.getters[
-                            `${this.resourceName}/filters`
-                        ].filter(megaFilterOnly);
-                    this.syncedFilters = storeFilters;
-                } else {
-                    this.syncedFilters = this.filters;
-                }
-            },
+            }, 500);
         },
-        computed: {
-            filtersAreApplied() {
-                return filtersAreApplied(
-                    this.$store,
-                    this.resourceName,
-                    megaFilterOnly
-                );
-            },
-            initialEncodedFilters() {
-                return this.queryStringParams[this.filterParameter] || "";
-            },
-            pageParameter() {
-                return this.viaRelationship
-                    ? this.viaRelationship + "_page"
-                    : this.resourceName + "_page";
-            },
-            activeFilterCount() {
-                return filtersAreApplied(
-                    this.$store,
-                    this.resourceName,
-                    megaFilterOnly
-                );
-            },
-            filtersTitle() {
-                if (this.resourceName) {
-                    // Get the resource name, ensure first letter is uppercase and remove trailing 's' if present
-                    const resourceName =
-                        this.resourceName.charAt(0).toUpperCase() +
-                        this.resourceName.slice(1);
-                    const singularName = resourceName.endsWith("s")
-                        ? resourceName.slice(0, -1)
-                        : resourceName;
-                    return `${singularName} filters`;
-                }
-                return "Filters";
-            },
+        toggleCollapse() {
+            this.collapsed = !this.collapsed;
         },
-        async created() {
-            await this.initializeState();
-
-            // Initialize synced filters
+        refreshFilter() {
+            this.refreshKey += 1; // Force filter components to re-render
             this.updateSyncedFilters();
+        },
+        updateSyncedFilters() {
+            // Get the latest filter data from the store
+            if (this.resourceName) {
+                const storeFilters =
+                    this.$store.getters[
+                        `${this.resourceName}/filters`
+                    ].filter(megaFilterOnly);
+                this.syncedFilters = storeFilters;
+            } else {
+                this.syncedFilters = this.filters;
+            }
+        },
+    },
+    computed: {
+        filtersAreApplied() {
+            return filtersAreApplied(
+                this.$store,
+                this.resourceName,
+                megaFilterOnly
+            );
+        },
+        initialEncodedFilters() {
+            return this.queryStringParams[this.filterParameter] || "";
+        },
+        pageParameter() {
+            return this.viaRelationship
+                ? this.viaRelationship + "_page"
+                : this.resourceName + "_page";
+        },
+        activeFilterCount() {
+            return filtersAreApplied(
+                this.$store,
+                this.resourceName,
+                megaFilterOnly
+            );
+        },
+        filtersTitle() {
+            if (this.resourceName) {
+                // Get the resource name, ensure first letter is uppercase and remove trailing 's' if present
+                const resourceName =
+                    this.resourceName.charAt(0).toUpperCase() +
+                    this.resourceName.slice(1);
+                const singularName = resourceName.endsWith("s")
+                    ? resourceName.slice(0, -1)
+                    : resourceName;
+                return `${singularName} filters`;
+            }
+            return "Filters";
+        },
+    },
+    async created() {
+        await this.initializeState();
 
-            // Listen for filter updates from default Nova filter menu
-            Nova.$on("mega-filter-update", () => {
-                this.updateSyncedFilters();
-                this.refreshFilter();
-            });
+        // Initialize synced filters
+        this.updateSyncedFilters();
 
-            // Listen for Nova's filter change events
-            Nova.$on("filter-changed", () => {
-                this.updateSyncedFilters();
-            });
-        },
-        beforeMount() {
-            this.collapsed = this.open ? this.open : this.filtersAreApplied;
-        },
-        beforeDestroy() {
-            // Clean up event listeners
-            Nova.$off("mega-filter-update");
-        },
-    };
+        // Listen for filter updates from default Nova filter menu
+        Nova.$on("mega-filter-update", () => {
+            this.updateSyncedFilters();
+            this.refreshFilter();
+        });
+
+        // Listen for Nova's filter change events
+        Nova.$on("filter-changed", () => {
+            this.updateSyncedFilters();
+        });
+    },
+    beforeMount() {
+        this.collapsed = this.open ? this.open : this.filtersAreApplied;
+    },
+    beforeDestroy() {
+        // Clean up event listeners
+        Nova.$off("mega-filter-update");
+    },
+};
 </script>
 
 <style>
-    .nova-mega-filter {
-        @apply overflow-visible;
-        --columns-mobile: 1;
-        --columns-desktop: 2;
-    }
+.nova-mega-filter {
+    @apply overflow-visible;
+    --columns-mobile: 1;
+    --columns-desktop: 2;
+}
 
-    /* Base styling */
-    .nova-mega-filter .filter__inner {
-        @apply bg-white;
-    }
+/* Base styling */
+.nova-mega-filter .filter__inner {
+    @apply bg-white;
+}
 
-    .nova-mega-filter .filter__header {
-        @apply text-gray-500 h-14;
-    }
+.nova-mega-filter .filter__header {
+    @apply text-gray-500 h-14;
+}
 
+.nova-mega-filter .filter__loop {
+    @apply border border-transparent rounded transition-all bg-white;
+    width: calc(100% / var(--columns-mobile));
+}
+
+.nova-mega-filter .filter__loop:hover {
+    @apply border-gray-200 bg-gray-50 bg-opacity-50;
+}
+
+/* Expanded state */
+.nova-mega-filter.\--expanded {
+    @apply bg-gray-50;
+}
+
+.nova-mega-filter .filter__inner {
+    @apply border border-gray-100;
+}
+
+/* Active state */
+.nova-mega-filter.\--active .filter__header {
+    @apply text-white;
+}
+
+/* Dark mode */
+.dark .nova-mega-filter .filter__inner {
+    @apply bg-gray-900 border-gray-700 border;
+}
+
+.dark .nova-mega-filter .filter__header {
+    @apply text-gray-400;
+}
+
+.dark .nova-mega-filter .filter__loop:hover {
+    @apply border-gray-600 bg-gray-700 bg-opacity-50;
+}
+
+.dark .nova-mega-filter.\--expanded {
+    @apply border border-gray-700;
+    background-color: rgba(var(--colors-gray-800));
+}
+
+.dark .nova-mega-filter.\--active {
+    background-color: rgba(var(--colors-gray-600));
+}
+
+.dark .nova-mega-filter.\--active .filter__header {
+    @apply text-gray-800;
+}
+
+.dark .nova-mega-filter .filter__loop {
+    @apply border border-transparent rounded transition-all w-full bg-gray-800;
+}
+
+/* Responsive */
+@screen lg {
     .nova-mega-filter .filter__loop {
-        @apply border border-transparent rounded transition-all bg-white;
-        width: calc(100% / var(--columns-mobile));
-    }
-
-    .nova-mega-filter .filter__loop:hover {
-        @apply border-gray-200 bg-gray-50 bg-opacity-50;
-    }
-
-    /* Expanded state */
-    .nova-mega-filter.\--expanded {
-        @apply bg-gray-50;
-    }
-
-    .nova-mega-filter .filter__inner {
-        @apply border border-gray-100;
-    }
-
-    /* Active state */
-    .nova-mega-filter.\--active .filter__header {
-        @apply text-white;
-    }
-
-    /* Dark mode */
-    .dark .nova-mega-filter .filter__inner {
-        @apply bg-gray-900 border-gray-700 border;
-    }
-
-    .dark .nova-mega-filter .filter__header {
-        @apply text-gray-400;
-    }
-
-    .dark .nova-mega-filter .filter__loop:hover {
-        @apply border-gray-600 bg-gray-700 bg-opacity-50;
-    }
-
-    .dark .nova-mega-filter.\--expanded {
-        @apply border border-gray-700;
-        background-color: rgba(var(--colors-gray-800));
-    }
-
-    .dark .nova-mega-filter.\--active {
-        background-color: rgba(var(--colors-gray-600));
-    }
-
-    .dark .nova-mega-filter.\--active .filter__header {
-        @apply text-gray-800;
+        width: calc(100% / var(--columns-desktop) - 2px);
     }
 
     .dark .nova-mega-filter .filter__loop {
-        @apply border border-transparent rounded transition-all w-full bg-gray-800;
+        width: calc(100% / var(--columns-desktop) - 2px);
+    }
+}
+
+/* Scoped width utilities using Tailwind's @apply directive */
+@screen md {
+    .nova-mega-filter .w-0 {
+        @apply !w-0;
     }
 
-    /* Responsive */
-    @screen lg {
-        .nova-mega-filter .filter__loop {
-            width: calc(100% / var(--columns-desktop) - 2px);
-        }
-
-        .dark .nova-mega-filter .filter__loop {
-            width: calc(100% / var(--columns-desktop) - 2px);
-        }
+    .nova-mega-filter .w-px {
+        @apply !w-px;
     }
 
-    .w-0 {
-        width: 0px !important;
+    .nova-mega-filter .w-0\.5 {
+        @apply !w-0.5;
     }
-    .w-px {
-        width: 1px !important;
+
+    .nova-mega-filter .w-1 {
+        @apply !w-1;
     }
-    .w-0.5 {
-        width: 0.125rem !important; /* 2px */
+
+    .nova-mega-filter .w-1\.5 {
+        @apply !w-1.5;
     }
-    .w-1 {
-        width: 0.25rem !important; /* 4px */
+
+    .nova-mega-filter .w-2 {
+        @apply !w-2;
     }
-    .w-1.5 {
-        width: 0.375rem !important; /* 6px */
+
+    .nova-mega-filter .w-2\.5 {
+        @apply !w-2.5;
     }
-    .w-2 {
-        width: 0.5rem !important; /* 8px */
+
+    .nova-mega-filter .w-3 {
+        @apply !w-3;
     }
-    .w-2.5 {
-        width: 0.625rem !important; /* 10px */
+
+    .nova-mega-filter .w-3\.5 {
+        @apply !w-3.5;
     }
-    .w-3 {
-        width: 0.75rem !important; /* 12px */
+
+    .nova-mega-filter .w-4 {
+        @apply !w-4;
     }
-    .w-3.5 {
-        width: 0.875rem !important; /* 14px */
+
+    .nova-mega-filter .w-5 {
+        @apply !w-5;
     }
-    .w-4 {
-        width: 1rem !important; /* 16px */
+
+    .nova-mega-filter .w-6 {
+        @apply !w-6;
     }
-    .w-5 {
-        width: 1.25rem !important; /* 20px */
+
+    .nova-mega-filter .w-7 {
+        @apply !w-7;
     }
-    .w-6 {
-        width: 1.5rem !important; /* 24px */
+
+    .nova-mega-filter .w-8 {
+        @apply !w-8;
     }
-    .w-7 {
-        width: 1.75rem !important; /* 28px */
+
+    .nova-mega-filter .w-9 {
+        @apply !w-9;
     }
-    .w-8 {
-        width: 2rem !important; /* 32px */
+
+    .nova-mega-filter .w-10 {
+        @apply !w-10;
     }
-    .w-9 {
-        width: 2.25rem !important; /* 36px */
+
+    .nova-mega-filter .w-11 {
+        @apply !w-11;
     }
-    .w-10 {
-        width: 2.5rem !important; /* 40px */
+
+    .nova-mega-filter .w-12 {
+        @apply !w-12;
     }
-    .w-11 {
-        width: 2.75rem !important; /* 44px */
+
+    .nova-mega-filter .w-14 {
+        @apply !w-14;
     }
-    .w-12 {
-        width: 3rem !important; /* 48px */
+
+    .nova-mega-filter .w-16 {
+        @apply !w-16;
     }
-    .w-14 {
-        width: 3.5rem !important; /* 56px */
+
+    .nova-mega-filter .w-20 {
+        @apply !w-20;
     }
-    .w-16 {
-        width: 4rem !important; /* 64px */
+
+    .nova-mega-filter .w-24 {
+        @apply !w-24;
     }
-    .w-20 {
-        width: 5rem !important; /* 80px */
+
+    .nova-mega-filter .w-28 {
+        @apply !w-28;
     }
-    .w-24 {
-        width: 6rem !important; /* 96px */
+
+    .nova-mega-filter .w-32 {
+        @apply !w-32;
     }
-    .w-28 {
-        width: 7rem !important; /* 112px */
+
+    .nova-mega-filter .w-36 {
+        @apply !w-36;
     }
-    .w-32 {
-        width: 8rem !important; /* 128px */
+
+    .nova-mega-filter .w-40 {
+        @apply !w-40;
     }
-    .w-36 {
-        width: 9rem !important; /* 144px */
+
+    .nova-mega-filter .w-44 {
+        @apply !w-44;
     }
-    .w-40 {
-        width: 10rem !important; /* 160px */
+
+    .nova-mega-filter .w-48 {
+        @apply !w-48;
     }
-    .w-44 {
-        width: 11rem !important; /* 176px */
+
+    .nova-mega-filter .w-52 {
+        @apply !w-52;
     }
-    .w-48 {
-        width: 12rem !important; /* 192px */
+
+    .nova-mega-filter .w-56 {
+        @apply !w-56;
     }
-    .w-52 {
-        width: 13rem !important; /* 208px */
+
+    .nova-mega-filter .w-60 {
+        @apply !w-60;
     }
-    .w-56 {
-        width: 14rem !important; /* 224px */
+
+    .nova-mega-filter .w-64 {
+        @apply !w-64;
     }
-    .w-60 {
-        width: 15rem !important; /* 240px */
+
+    .nova-mega-filter .w-72 {
+        @apply !w-72;
     }
-    .w-64 {
-        width: 16rem !important; /* 256px */
+
+    .nova-mega-filter .w-80 {
+        @apply !w-80;
     }
-    .w-72 {
-        width: 18rem !important; /* 288px */
+
+    .nova-mega-filter .w-96 {
+        @apply !w-96;
     }
-    .w-80 {
-        width: 20rem !important; /* 320px */
+
+    .nova-mega-filter .w-auto {
+        @apply !w-auto;
     }
-    .w-96 {
-        width: 24rem !important; /* 384px */
+
+    .nova-mega-filter .w-1\/2 {
+        @apply !w-1/2;
     }
-    .w-auto {
-        width: auto !important;
+
+    .nova-mega-filter .w-1\/3 {
+        @apply !w-1/3;
     }
-    .w-1\/2 {
-        width: 50% !important;
+
+    .nova-mega-filter .w-2\/3 {
+        @apply !w-2/3;
     }
-    .w-1\/3 {
-        width: 33.333333% !important;
+
+    .nova-mega-filter .w-1\/4 {
+        @apply !w-1/4;
     }
-    .w-2\/3 {
-        width: 66.666667% !important;
+
+    .nova-mega-filter .w-2\/4 {
+        @apply !w-2/4;
     }
-    .w-1\/4 {
-        width: 25% !important;
+
+    .nova-mega-filter .w-3\/4 {
+        @apply !w-3/4;
     }
-    .w-2\/4 {
-        width: 50% !important;
+
+    .nova-mega-filter .w-1\/5 {
+        @apply !w-1/5;
     }
-    .w-3\/4 {
-        width: 75% !important;
+
+    .nova-mega-filter .w-2\/5 {
+        @apply !w-2/5;
     }
-    .w-1\/5 {
-        width: 20% !important;
+
+    .nova-mega-filter .w-3\/5 {
+        @apply !w-3/5;
     }
-    .w-2\/5 {
-        width: 40% !important;
+
+    .nova-mega-filter .w-4\/5 {
+        @apply !w-4/5;
     }
-    .w-3\/5 {
-        width: 60% !important;
+
+    .nova-mega-filter .w-1\/6 {
+        @apply !w-1/6;
     }
-    .w-4\/5 {
-        width: 80% !important;
+
+    .nova-mega-filter .w-2\/6 {
+        @apply !w-2/6;
     }
-    .w-1\/6 {
-        width: 16.666667% !important;
+
+    .nova-mega-filter .w-3\/6 {
+        @apply !w-3/6;
     }
-    .w-2\/6 {
-        width: 33.333333% !important;
+
+    .nova-mega-filter .w-4\/6 {
+        @apply !w-4/6;
     }
-    .w-3\/6 {
-        width: 50% !important;
+
+    .nova-mega-filter .w-5\/6 {
+        @apply !w-5/6;
     }
-    .w-4\/6 {
-        width: 66.666667% !important;
+
+    .nova-mega-filter .w-1\/12 {
+        @apply !w-1/12;
     }
-    .w-5\/6 {
-        width: 83.333333% !important;
+
+    .nova-mega-filter .w-2\/12 {
+        @apply !w-2/12;
     }
-    .w-1\/12 {
-        width: 8.333333% !important;
+
+    .nova-mega-filter .w-3\/12 {
+        @apply !w-3/12;
     }
-    .w-2\/12 {
-        width: 16.666667% !important;
+
+    .nova-mega-filter .w-4\/12 {
+        @apply !w-4/12;
     }
-    .w-3\/12 {
-        width: 25% !important;
+
+    .nova-mega-filter .w-5\/12 {
+        @apply !w-5/12;
     }
-    .w-4\/12 {
-        width: 33.333333% !important;
+
+    .nova-mega-filter .w-6\/12 {
+        @apply !w-6/12;
     }
-    .w-5\/12 {
-        width: 41.666667% !important;
+
+    .nova-mega-filter .w-7\/12 {
+        @apply !w-7/12;
     }
-    .w-6\/12 {
-        width: 50% !important;
+
+    .nova-mega-filter .w-8\/12 {
+        @apply !w-8/12;
     }
-    .w-7\/12 {
-        width: 58.333333% !important;
-    }
-    .w-8\/12 {
-        width: 66.666667% !important;
-    }
-    .w-full {
-        width: 100% !important;
-    }
+}
 </style>
