@@ -1,7 +1,7 @@
 # Marshmallow - Nova Mega Filter
 
 > [!important]
-> This package was originally forked from [digital-creative/nova-mega-filter](<[https://github.com/dcasia/nova-mega-filter](https://github.com/dcasia/nova-mega-filter)>). Since we were making many opinionated changes, we decided to continue development in our own version rather than submitting pull requests that might not benefit all users of the original package. You’re welcome to use this package—we’re actively maintaining it. If you encounter any issues, please don’t hesitate to reach out.
+> This package was originally forked from [digital-creative/nova-mega-filter](https://github.com/dcasia/nova-mega-filter). Since we were making many opinionated changes, we decided to continue development in our own version rather than submitting pull requests that might not benefit all users of the original package. You’re welcome to use this package—we’re actively maintaining it. If you encounter any issues, please don’t hesitate to reach out.
 
 # Nova Mega Filter
 
@@ -16,7 +16,12 @@ Display all your filters in a card instead of a tiny dropdown!
   <img alt="Nova Mega Filter in Action" src="https://raw.githubusercontent.com/marshmallow-packages/nova-mega-filter/main/screenshots/light.png">
 </picture>
 
-# Installation
+## Requirements
+
+- PHP `^8.0`
+- Laravel Nova `^4.0 | ^5.0`
+
+## Installation
 
 You can install the package via composer:
 
@@ -24,9 +29,14 @@ You can install the package via composer:
 composer require marshmallow/nova-mega-filter
 ```
 
+The service provider is registered automatically through Laravel package
+discovery, and the card's assets are registered with Nova on boot — there is
+nothing else to publish.
+
 ## Basic Usage
 
-Basic demo showing the power of this package:
+Add the `MegaFilterTrait` to your Nova resource (or lens) and wrap the filters
+you want to display in the card with `MegaFilter::make()`:
 
 ```php
 use Marshmallow\MegaFilter\MegaFilter;
@@ -36,7 +46,7 @@ class ExampleNovaResource extends Resource {
 
     use MegaFilterTrait;
 
-    public function filters(RequestRequest $request): array
+    public function filters(NovaRequest $request): array
     {
         return [
             MegaFilter::make([
@@ -53,7 +63,7 @@ And you are done!
 
 ---
 
-You can also add other fields alongside your Mega Filters, they will be rendered as usual:
+You can also add other filters alongside your Mega Filter, they will be rendered as usual:
 
 ```php
 use Marshmallow\MegaFilter\MegaFilter;
@@ -88,7 +98,7 @@ public function filters(NovaRequest $request): array
 }
 ```
 
-By default, the filter section is collapsed. If you want it to open or expanded initially, you can do:
+By default, the filter section is collapsed. If you want it to be open or expanded initially, you can do:
 
 ```php
 public function filters(NovaRequest $request): array
@@ -132,6 +142,31 @@ Available width classes include:
 
 > Note: At the moment this package only works with a single Mega Filter per resource, adding multiple on the same resource may result in unexpected behavior.
 
+## API Reference
+
+The `MegaFilter` instance returned by `MegaFilter::make()` exposes the following
+fluent methods:
+
+| Method | Description |
+| --- | --- |
+| `columns(int $columns)` | Number of columns to lay the filters out in. |
+| `open(bool $open = true)` | Render the filter card expanded instead of collapsed. |
+| `withMeta(array $meta)` | Pass additional meta data to the card (e.g. `['width' => 'w-1/2']` on an individual filter). |
+
+## Credits
+
+- [LTKort](https://github.com/marshmallow-packages)
+- [Rafael Milewski](https://github.com/marshmallow-packages)
+- [All Contributors](https://github.com/marshmallow-packages/nova-mega-filter/contributors)
+
+This package was originally forked from [digital-creative/nova-mega-filter](https://github.com/dcasia/nova-mega-filter).
+
+## Security
+
+If you discover any security related issues, please email
+[security@marshmallow.dev](mailto:security@marshmallow.dev) instead of using the
+issue tracker.
+
 ## License
 
-The MIT License (MIT). Please see [License File](https://raw.githubusercontent.com/marshmallow-packages/nova-mega-filter/master/LICENSE) for more information.
+The MIT License (MIT). Please see the [License File](https://github.com/marshmallow-packages/nova-mega-filter/blob/main/LICENSE) for more information.
